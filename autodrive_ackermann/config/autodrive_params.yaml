@@ -1,0 +1,42 @@
+ackermann_to_autodrive:
+  ros__parameters:
+    vehicle_name: "roboracer_1"
+
+    # Conversion parameters
+    speed_to_throttle_gain: 1.0
+    speed_to_throttle_offset: 0.0
+    steering_angle_to_servo_gain: 1.0
+    steering_angle_to_servo_offset: 0.0
+
+    # Limits
+    max_throttle: 1.0
+    min_throttle: -1.0
+    max_steering: 1.0
+    min_steering: -1.0
+
+autodrive_to_odom:
+  ros__parameters:
+    vehicle_name: "roboracer_1"
+
+    # Frame IDs
+    odom_frame: "odom"
+    base_frame: "base_link"
+
+    # Options
+    publish_tf: true
+    use_imu: true
+    use_tf_lookup: true  # Automatically get vehicle geometry from TF tree
+    integration_method: "analytical"  # euler, trapezoidal, or analytical
+
+    # IMU filtering
+    imu_angular_velocity_alpha: 0.3  # Low-pass filter coefficient (0-1)
+
+    # Vehicle parameters (from TF data)
+    wheelbase: 0.33  # Distance between front and rear axles (meters)
+    track_width: 0.236  # Distance between left and right wheels (meters)
+    wheel_radius: 0.05  # Wheel radius (meters) - estimated
+
+    # IMU offset from base_link (roboracer_1 frame at rear axle)
+    imu_offset_x: 0.080  # IMU is 8cm in front of rear axle
+    imu_offset_y: 0.000  # IMU is centered
+    imu_offset_z: 0.055  # IMU is 5.5cm above ground
